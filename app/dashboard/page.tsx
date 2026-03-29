@@ -50,6 +50,11 @@ export default async function DashboardPage() {
 
       <h2 className="section-title mt-5">빠른 이동</h2>
       <div className="menu-grid">
+        <Link href="/flights" className="menu-card glass">
+          <div className="menu-icon">✈️</div>
+          <h3>항공권 및 일정 추천</h3>
+          <p>가장 저렴한 6인 왕복 옵션 확인</p>
+        </Link>
         <Link href="/map" className="menu-card glass">
           <div className="menu-icon">🗺️</div>
           <h3>지도 & 일정</h3>

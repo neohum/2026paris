@@ -16,6 +16,7 @@ export default function Navbar({ user }: { user: any }) {
       </div>
       <div className="nav-links">
         <Link href="/dashboard" className={pathname === '/dashboard' ? 'active' : ''}>대시보드</Link>
+        <Link href="/flights" className={pathname === '/flights' ? 'active' : ''}>항공권 검색</Link>
         <Link href="/map" className={pathname === '/map' ? 'active' : ''}>지도/일정</Link>
         <Link href="/forms" className={pathname === '/forms' ? 'active' : ''}>정보 폼</Link>
         <Link href="/ledger" className={pathname === '/ledger' ? 'active' : ''}>가계부</Link>

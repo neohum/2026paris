@@ -537,6 +537,110 @@ function FilterBar({
   );
 }
 
+// ─── Trip Details Board ───────────────────────────────────────────────────────
+function TripDetailsBoard({
+  accommodations,
+  setAccommodations,
+  attractions,
+  setAttractions,
+}: {
+  accommodations: string[];
+  setAccommodations: React.Dispatch<React.SetStateAction<string[]>>;
+  attractions: string[];
+  setAttractions: React.Dispatch<React.SetStateAction<string[]>>;
+}) {
+  const [accInput, setAccInput] = useState("");
+  const [attrInput, setAttrInput] = useState("");
+
+  const addAcc = () => {
+    if (accInput.trim()) setAccommodations([...accommodations, accInput.trim()]);
+    setAccInput("");
+  };
+
+  const removeAcc = (idx: number) => {
+    setAccommodations(accommodations.filter((_, i) => i !== idx));
+  };
+
+  const addAttr = () => {
+    if (attrInput.trim()) setAttractions([...attractions, attrInput.trim()]);
+    setAttrInput("");
+  };
+
+  const removeAttr = (idx: number) => {
+    setAttractions(attractions.filter((_, i) => i !== idx));
+  };
+
+  return (
+    <div className={styles.tripBoardWrapper}>
+      <div className={styles.tripBoard}>
+        <h3 className={styles.tripBoardTitle}>🎒 내 여행 상세 정보</h3>
+        
+        <div className={styles.tripBoardGrid}>
+          {/* Accommodation Section */}
+          <div className={styles.tripBoardColumn}>
+            <div className={styles.tripBoardHeader}>
+              <span className={styles.tripBoardIcon}>🏨</span>
+              <span className={styles.tripBoardLabel}>숙소 정보</span>
+            </div>
+            <div className={styles.tripBoardInputRow}>
+              <input
+                className={styles.tripBoardInput}
+                placeholder="예: 파리 1구 에어비앤비"
+                value={accInput}
+                onChange={(e) => setAccInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && addAcc()}
+              />
+              <button className={styles.tripBoardAddBtn} onClick={addAcc}>추가</button>
+            </div>
+            <div className={styles.tripBoardList}>
+              {accommodations.length === 0 ? (
+                <div className={styles.tripBoardEmpty}>등록된 숙소가 없습니다.</div>
+              ) : (
+                accommodations.map((acc, i) => (
+                  <div key={i} className={styles.tripBoardItem}>
+                    <div className={styles.tripBoardItemText}>{acc}</div>
+                    <button className={styles.tripBoardRemove} onClick={() => removeAcc(i)}>✕</button>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+
+          {/* Attractions Section */}
+          <div className={styles.tripBoardColumn}>
+            <div className={styles.tripBoardHeader}>
+              <span className={styles.tripBoardIcon}>📸</span>
+              <span className={styles.tripBoardLabel}>관광지 및 일정</span>
+            </div>
+            <div className={styles.tripBoardInputRow}>
+              <input
+                className={styles.tripBoardInput}
+                placeholder="예: 에펠탑, 루브르 박물관"
+                value={attrInput}
+                onChange={(e) => setAttrInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && addAttr()}
+              />
+              <button className={styles.tripBoardAddBtn} onClick={addAttr}>추가</button>
+            </div>
+            <div className={styles.tripBoardTags}>
+              {attractions.length === 0 ? (
+                <div className={styles.tripBoardEmpty}>등록된 관광지가 없습니다.</div>
+              ) : (
+                attractions.map((attr, i) => (
+                  <div key={i} className={styles.tripBoardTag}>
+                    {attr}
+                    <button className={styles.tripBoardTagRemove} onClick={() => removeAttr(i)}>✕</button>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 const DEFAULT_PARAMS: SearchParams = {
   origin: "PUS",
@@ -558,6 +662,9 @@ export default function FlightSearchClient() {
   const [loading, setLoading] = useState(false);
   const [prevOutbound, setPrevOutbound] = useState(params.outbound);
   const [prevInbound, setPrevInbound] = useState(params.inbound);
+
+  const [accommodations, setAccommodations] = useState<string[]>([]);
+  const [attractions, setAttractions] = useState<string[]>([]);
 
   const handleParamsChange = useCallback((newParams: SearchParams) => {
     const dateChanged =
@@ -646,6 +753,13 @@ export default function FlightSearchClient() {
           )}
         </div>
       </div>
+
+      <TripDetailsBoard
+        accommodations={accommodations}
+        setAccommodations={setAccommodations}
+        attractions={attractions}
+        setAttractions={setAttractions}
+      />
 
       {/* Date bars */}
       <div className={styles.dateBarsWrapper}>

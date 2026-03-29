@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap');
 
 :root {
-  --primary: #c9a227; /* Gold */
-  --primary-hover: #e0b838;
-  --bg-dark: #0f111a;
-  --bg-card: rgba(255, 255, 255, 0.05);
-  --text-main: #f3f4f6;
-  --text-muted: #9ca3af;
-  --nav-bg: rgba(15, 17, 26, 0.8);
+  --primary: #0770e3;
+  --primary-hover: #084eb8;
+  --bg-light: #f4f7fb;
+  --bg-card: #ffffff;
+  --text-main: #111236;
+  --text-muted: #8f9bba;
+  --nav-bg: rgba(255, 255, 255, 0.9);
 }
 
 * {
@@ -18,9 +18,8 @@
 
 body {
   font-family: 'Outfit', 'Noto Sans KR', sans-serif;
-  background-color: var(--bg-dark);
+  background-color: var(--bg-light);
   color: var(--text-main);
-  background-image: linear-gradient(to bottom right, #0f111a, #1a1c29);
   min-height: 100vh;
 }
 
@@ -29,8 +28,9 @@ body {
   background: var(--bg-card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 /* Base styles */
@@ -44,7 +44,7 @@ input, button, select, textarea {
 button {
   cursor: pointer;
   background-color: var(--primary);
-  color: #0f111a;
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   padding: 10px 20px;
@@ -60,22 +60,24 @@ button:hover {
   border: 1px solid var(--primary);
 }
 .btn-outline:hover {
-  background: rgba(201, 162, 39, 0.1);
+  background: rgba(7, 112, 227, 0.05);
 }
 
 .input-field {
   width: 100%;
   padding: 12px;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #ffffff;
+  border: 1px solid #e0e7f5;
   border-radius: 8px;
-  color: white;
+  color: var(--text-main);
   margin-top: 8px;
   margin-bottom: 20px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
 }
 .input-field:focus {
   outline: none;
   border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(7, 112, 227, 0.12);
 }
 
 .container {
@@ -89,7 +91,5 @@ button:hover {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  background: linear-gradient(90deg, #fff, var(--primary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--primary);
 }

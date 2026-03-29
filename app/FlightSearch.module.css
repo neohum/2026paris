@@ -10,7 +10,7 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 9999;
   background: #ffffff;
   border-bottom: 1px solid #e0e7f5;
   box-shadow: 0 2px 12px rgba(7, 112, 227, 0.08);
@@ -174,7 +174,7 @@
 
 /* ─── Hero Bar ────────────────────────────────────────────────────────────────── */
 .heroBar {
-  background: linear-gradient(135deg, #05203c 0%, #0770e3 60%, #00a698 100%);
+  background: linear-gradient(135deg, #0770e3 0%, #00a698 100%);
   padding: 32px 24px;
   color: white;
 }
@@ -369,7 +369,7 @@
   border-bottom: 1px solid #e0e7f5;
   position: sticky;
   top: 64px;
-  z-index: 90;
+  z-index: 9998;
   box-shadow: 0 2px 8px rgba(7, 112, 227, 0.06);
   margin-top: 16px;
 }
@@ -892,12 +892,13 @@
 
 /* ─── Footer ──────────────────────────────────────────────────────────────────── */
 .footer {
-  background: #05203c;
-  color: rgba(255,255,255,0.5);
+  background: #f8fafd;
+  color: #8f9bba;
   text-align: center;
   padding: 24px;
   font-size: 0.82rem;
   margin-top: auto;
+  border-top: 1px solid #e0e7f5;
 }
 
 /* ─── Responsive ─────────────────────────────────────────────────────────────── */
@@ -957,4 +958,184 @@
     padding: 10px 16px;
     gap: 10px;
   }
+}
+
+/* ─── Trip Details Board ─────────────────────────────────────────────────────── */
+.tripBoardWrapper {
+  max-width: 1200px;
+  margin: 24px auto 0;
+  padding: 0 24px;
+}
+
+.tripBoard {
+  background: white;
+  border-radius: 16px;
+  border: 1.5px solid #e0e7f5;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(7, 112, 227, 0.06);
+}
+
+.tripBoardTitle {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #111236;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tripBoardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .tripBoardGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tripBoardColumn {
+  background: #f8fafd;
+  border: 1px solid #e0e7f5;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.tripBoardHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tripBoardIcon {
+  font-size: 1.2rem;
+}
+
+.tripBoardLabel {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #444a6d;
+}
+
+.tripBoardInputRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tripBoardInput {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1.5px solid #e0e7f5;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.tripBoardInput:focus {
+  border-color: #0770e3;
+  box-shadow: 0 0 0 3px rgba(7, 112, 227, 0.12);
+}
+
+.tripBoardAddBtn {
+  background: #0770e3;
+  color: white;
+  border: none;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+.tripBoardAddBtn:hover {
+  background: #084eb8;
+}
+
+.tripBoardEmpty {
+  font-size: 0.85rem;
+  color: #8f9bba;
+  text-align: center;
+  padding: 16px 0;
+  background: white;
+  border-radius: 8px;
+  border: 1px dashed #c8d5eb;
+}
+
+.tripBoardList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tripBoardItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #e0e7f5;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.tripBoardItemText {
+  font-size: 0.9rem;
+  color: #111236;
+  font-weight: 500;
+}
+
+.tripBoardRemove {
+  background: none;
+  border: none;
+  color: #8f9bba;
+  font-size: 0.9rem;
+  padding: 4px;
+  border-radius: 50%;
+  line-height: 1;
+  transition: color 0.15s, background 0.15s;
+}
+.tripBoardRemove:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.tripBoardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tripBoardTag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid #e0e7f5;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0770e3;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.tripBoardTagRemove {
+  background: none;
+  border: none;
+  color: #8f9bba;
+  font-size: 0.8rem;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.15s, background 0.15s;
+}
+.tripBoardTagRemove:hover {
+  background: #fee2e2;
+  color: #ef4444;
 }

@@ -4,7 +4,7 @@ import { updateSession } from '@/lib/auth';
 
 export default async function proxy(request: NextRequest) {
   // 인증이 필요한 경로들
-  const protectedRoutes = ['/dashboard', '/map', '/forms', '/ledger'];
+  const protectedRoutes = ['/dashboard', '/flights', '/map', '/forms', '/ledger'];
   const isProtectedRoute = protectedRoutes.some(route => request.nextUrl.pathname.startsWith(route));
 
   // 로그인, 가입 페이지 접근 시 이미 로그인되어 있으면 대시보드로 이동

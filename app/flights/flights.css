@@ -1,0 +1,139 @@
+.flights-container {
+  padding-bottom: 4rem;
+}
+
+.summary-banner {
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid var(--primary);
+  background: rgba(201, 162, 39, 0.1);
+}
+
+.summary-banner h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.flight-controls {
+  padding: 1.5rem 2rem;
+}
+
+.flight-input {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 8px 12px;
+  color: #fff;
+  border-radius: 6px;
+  outline: none;
+}
+.flight-input:focus {
+  border-color: var(--primary);
+}
+
+.mb-2 {
+  margin-bottom: 2rem;
+}
+
+.flight-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.flight-card {
+  position: relative;
+  padding: 2.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.flight-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.flight-card.recommended {
+  border: 1px solid var(--primary);
+  background: linear-gradient(145deg, rgba(201,162,39,0.08), rgba(255,255,255,0.02));
+}
+
+.badge {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--primary);
+  color: #000;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 10px rgba(201,162,39,0.4);
+}
+
+.flight-type {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.flight-airline {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.flight-details {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.flight-details td {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.flight-details tr:last-child td {
+  border-bottom: none;
+}
+.flight-details td:first-child {
+  color: var(--text-muted);
+  width: 40%;
+}
+
+.flight-price {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.flight-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  flex-grow: 1;
+}
+
+.flight-features li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #d1d5db;
+  line-height: 1.4;
+}
+
+.skyscanner-btn {
+  display: block;
+  text-align: center;
+  background-color: var(--primary);
+  color: #0f111a;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 700;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.skyscanner-btn:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.02);
+}

@@ -6,7 +6,7 @@
   margin: 1rem 20px;
   position: sticky;
   top: 1rem;
-  z-index: 100;
+  z-index: 9999;
   border-radius: 50px; /* 둥근 캡슐 형태 */
 }
 
