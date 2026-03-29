@@ -1,0 +1,158 @@
+diff --git a/app/FlightSearch.tsx b/app/FlightSearch.tsx
+index e734382..c8406bf 100644
+--- a/app/FlightSearch.tsx
++++ b/app/FlightSearch.tsx
+@@ -1,6 +1,6 @@
+ "use client";
+ 
+-import { useState, useCallback } from "react";
++import { useState, useCallback, useEffect } from "react";
+ import styles from "./FlightSearch.module.css";
+ 
+ // ─── Types ───────────────────────────────────────────────────────────────────
+@@ -524,53 +524,7 @@ function FilterBar({
+             id="max-price-range"
+             type="range"
+             min={600000}
+-            max={maxAvailable}
+-            step={50000}
+-            value={filters.maxPrice}
+-            onChange={(e) => onChange({ ...filters, maxPrice: Number(e.target.value) })}
+-            className={styles.priceRange}
+-          />
+-          <span className={styles.filterPrice}>{Math.round(filters.maxPrice / 10000)}만원</span>
+-        </div>
+-      </div>
+-    </div>
+-  );
+-}
+-
+-// ─── Trip Details Board ───────────────────────────────────────────────────────
+-function TripDetailsBoard({
+-  accommodations,
+-  setAccommodations,
+-  attractions,
+-  setAttractions,
+-}: {
+-  accommodations: string[];
+-  setAccommodations: React.Dispatch<React.SetStateAction<string[]>>;
+-  attractions: string[];
+-  setAttractions: React.Dispatch<React.SetStateAction<string[]>>;
+-}) {
+-  const [accInput, setAccInput] = useState("");
+-  const [attrInput, setAttrInput] = useState("");
+-
+-  const addAcc = () => {
+-    if (accInput.trim()) setAccommodations([...accommodations, accInput.trim()]);
+-    setAccInput("");
+-  };
+-
+-  const removeAcc = (idx: number) => {
+-    setAccommodations(accommodations.filter((_, i) => i !== idx));
+-  };
+-
+-  const addAttr = () => {
+-    if (attrInput.trim()) setAttractions([...attractions, attrInput.trim()]);
+-    setAttrInput("");
+-  };
+-
+-  const removeAttr = (idx: number) => {
+-    setAttractions(attractions.filter((_, i) => i !== idx));
+-  };
+-
+-  return (
++            ma  return (
+     <div className={styles.tripBoardWrapper}>
+       <div className={styles.tripBoard}>
+         <h3 className={styles.tripBoardTitle}>🎒 내 여행 상세 정보</h3>
+@@ -641,6 +595,82 @@ function TripDetailsBoard({
+   );
+ }
+ 
++// ─── Hero Carousel ───────────────────────────────────────────────────────────
++const PARISIEN_IMAGES = [
++  "/paris/paris_eiffel_sunset_1774756188057.png",
++  "/paris/paris_louvre_night_1774756201576.png",
++  "/paris/paris_seine_river_1774756218316.png",
++  "/paris/paris_montmartre_street_1774756235219.png",
++  "/paris/paris_cafe_morning_1774756252043.png",
++  "/paris/paris_arc_de_triomphe_1774756267905.png",
++];
++
++function HeroCarousel() {
++  const [currentIndex, setCurrentIndex] = useState(0);
++
++  useEffect(() => {
++    const timer = setInterval(() => {
++      setCurrentIndex((prev) => (prev + 1) % PARISIEN_IMAGES.length);
++    }, 5000);
++    return () => clearInterval(timer);
++  }, []);
++
++  return (
++    <div className={styles.heroCarousel}>
++      {PARISIEN_IMAGES.map((src, idx) => (
++        <div
++          key={src}
++          className={`${styles.heroSlide} ${idx === currentIndex ? styles.heroSlideActive : ""}`}
++          style={{ backgroundImage: `url(${src})` }}
++        />
++      ))}
++      <div className={styles.heroOverlay} />
++    </div>
++  );
++}
++
++// ─── Main Component ───────────────────────────────────────────────────────────�</button>
++                  </div>
++                ))
++              )}
++            </div>
++          </div>
++
++          {/* Attractions Section */}
++          <div className={styles.tripBoardColumn}>
++            <div className={styles.tripBoardHeader}>
++              <span className={styles.tripBoardIcon}>📸</span>
++              <span className={styles.tripBoardLabel}>관광지 및 일정</span>
++            </div>
++            <div className={styles.tripBoardInputRow}>
++              <input
++                className={styles.tripBoardInput}
++                placeholder="예: 에펠탑, 루브르 박물관"
++                value={attrInput}
++                onChange={(e) => setAttrInput(e.target.value)}
++                onKeyDown={(e) => e.key === "Enter" && addAttr()}
++              />
++              <button className={styles.tripBoardAddBtn} onClick={addAttr}>추가</button>
++            </div>
++            <div className={styles.tripBoardTags}>
++              {attractions.length === 0 ? (
++                <div className={styles.tripBoardEmpty}>등록된 관광지가 없습니다.</div>
++              ) : (
++                attractions.map((attr, i) => (
++                  <div key={i} className={styles.tripBoardTag}>
++                    {attr}
++                    <button className={styles.tripBoardTagRemove} onClick={() => removeAttr(i)}>✕</button>
++                  </div>
++                ))
++              )}
++            </div>
++          </div>
++        </div>
++      </div>
++    </div>
++  );
++}
++
+ // ─── Main Component ───────────────────────────────────────────────────────────
+ const DEFAULT_PARAMS: SearchParams = {
+   origin: "PUS",
+@@ -722,6 +752,7 @@ export default function FlightSearchClient() {
+       <SearchHeader params={params} onParamsChange={handleParamsChange} />
+ 
+       <div className={styles.heroBar}>
++        <HeroCarousel />
+         <div className={styles.heroBarInner}>
+           <div className={styles.heroRoute}>
+             <div className={styles.heroAirport}>

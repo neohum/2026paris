@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import styles from "./FlightSearch.module.css";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -652,6 +652,40 @@ const DEFAULT_PARAMS: SearchParams = {
   tripType: "round",
 };
 
+// ─── Hero Carousel ────────────────────────────────────────────────────────────
+const HERO_IMAGES = [
+  "/paris1.png",
+  "/paris2.png",
+  "/paris3.png",
+  "/paris4.png",
+  "/paris5.png",
+  "/paris6.png",
+];
+
+function HeroCarousel() {
+  const [currentIdx, setCurrentIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIdx((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className={styles.carouselWrapper}>
+      {HERO_IMAGES.map((src, idx) => (
+        <div
+          key={src}
+          className={`${styles.carouselSlide} ${idx === currentIdx ? styles.carouselActive : ""}`}
+          style={{ backgroundImage: `url(${src})` }}
+        />
+      ))}
+      <div className={styles.carouselOverlay} />
+    </div>
+  );
+}
+
 export default function FlightSearchClient() {
   const [params, setParams] = useState<SearchParams>(DEFAULT_PARAMS);
   const [filters, setFilters] = useState<Filters>({
@@ -722,6 +756,7 @@ export default function FlightSearchClient() {
       <SearchHeader params={params} onParamsChange={handleParamsChange} />
 
       <div className={styles.heroBar}>
+        <HeroCarousel />
         <div className={styles.heroBarInner}>
           <div className={styles.heroRoute}>
             <div className={styles.heroAirport}>

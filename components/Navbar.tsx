@@ -20,6 +20,9 @@ export default function Navbar({ user }: { user: any }) {
         <Link href="/map" className={pathname === '/map' ? 'active' : ''}>지도/일정</Link>
         <Link href="/forms" className={pathname === '/forms' ? 'active' : ''}>정보 폼</Link>
         <Link href="/ledger" className={pathname === '/ledger' ? 'active' : ''}>가계부</Link>
+        {user?.username === 'neohum' && (
+          <Link href="/admin" className={pathname === '/admin' ? 'active' : ''} style={{ color: '#10b981', fontWeight: 700 }}>정보 총괄(★)</Link>
+        )}
       </div>
       <div className="nav-user">
         <span>{user?.name}님</span>

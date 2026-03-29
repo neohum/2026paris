@@ -174,12 +174,50 @@
 
 /* ─── Hero Bar ────────────────────────────────────────────────────────────────── */
 .heroBar {
-  background: linear-gradient(135deg, #0770e3 0%, #00a698 100%);
+  background: #0770e3;
   padding: 32px 24px;
   color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.carouselWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.carouselSlide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.carouselActive {
+  opacity: 1;
+}
+
+.carouselOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .heroBarInner {
+  position: relative;
+  z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;

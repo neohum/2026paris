@@ -2,6 +2,7 @@ import { getSession } from '@/lib/auth';
 import { query } from '@/lib/db';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import DdayCard from './DdayCard';
 import './dashboard.css';
 
 export default async function DashboardPage() {
@@ -26,11 +27,7 @@ export default async function DashboardPage() {
     <div className="dashboard-container">
       <h1 className="page-title">환영합니다, {user.name}님! 👋</h1>
       
-      <div className="dday-card glass text-center">
-        <h2>프랑스 파리 여행까지</h2>
-        <div className="dday-number">D-{diffDays}</div>
-        <p>2026.07.30 (목) ~ 08.13 (목)</p>
-      </div>
+      <DdayCard diffDays={diffDays} />
 
       <div className="status-grid">
         <div className="status-card glass">
@@ -69,6 +66,16 @@ export default async function DashboardPage() {
           <div className="menu-icon">💶</div>
           <h3>여행 가계부</h3>
           <p>공동 경비 지출 내역 및 정산</p>
+        </Link>
+        <Link href="/paris" className="menu-card glass">
+          <div className="menu-icon">🗼</div>
+          <h3>전체 일정 투표</h3>
+          <p>파리 및 렌터카 코스 투표결과 보기</p>
+        </Link>
+        <Link href="/checklist" className="menu-card glass" style={{ border: '1px solid rgba(16, 185, 129, 0.4)' }}>
+          <div className="menu-icon">🎒</div>
+          <h3 style={{ color: '#10b981' }}>준비물 체크리스트</h3>
+          <p>여행 출발 전 꼭 챙겨야 할 물품 점검</p>
         </Link>
       </div>
     </div>
