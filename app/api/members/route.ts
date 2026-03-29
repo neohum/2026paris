@@ -24,17 +24,14 @@ export async function POST(request: NextRequest) {
     // Parse File
     const file = formData.get('passportPhoto') as File | null;
     let photoPath = null;
+    let photoBuffer: Buffer | null = null;
+    let photoMime = '';
     
     if (file && file.size > 0) {
       const bytes = await file.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-      const filename = `${user.id}_${Date.now()}_${file.name.replace(/[^a-zA-Z0-9.]/g, '')}`;
-      const uploadDir = join(process.cwd(), 'public/uploads');
-      if (!fs.existsSync(uploadDir)) {
-          fs.mkdirSync(uploadDir, { recursive: true });
-      }
-      photoPath = `/uploads/${filename}`;
-      await writeFile(join(uploadDir, filename), buffer);
+      photoBuffer = Buffer.from(bytes);
+      photoMime = file.type || 'image/jpeg';
+      photoPath = `/api/uploads/${user.id}?t=${Date.now()}`;
     }
 
     // Insert or update member_info
@@ -59,6 +56,15 @@ export async function POST(request: NextRequest) {
           passport_expiry, birth_date, emergency_contact, notes, photo_path
         ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
       `, [user.id, passportLastName, passportFirstName, passportNumber, passportExpiry, birthDate, emergencyContact, notes, photoPath]);
+    }
+
+    if (photoBuffer && photoPath) {
+      await query(`
+        INSERT INTO member_photos (user_id, photo_data, photo_mime) 
+        VALUES ($1, $2, $3)
+        ON CONFLICT (user_id) 
+        DO UPDATE SET photo_data = EXCLUDED.photo_data, photo_mime = EXCLUDED.photo_mime, created_at = NOW()
+      `, [user.id, photoBuffer, photoMime]);
     }
 
     return NextResponse.json({ message: '저장 완료' });

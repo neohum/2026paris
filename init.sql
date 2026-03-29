@@ -24,6 +24,14 @@ CREATE TABLE IF NOT EXISTS member_info (
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- 멤버 여권 사진 테이블 (Railway의 File System 초기화 방지)
+CREATE TABLE IF NOT EXISTS member_photos (
+  user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+  photo_data BYTEA NOT NULL,
+  photo_mime VARCHAR(100) NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- 코스 테이블
 CREATE TABLE IF NOT EXISTS courses (
   id SERIAL PRIMARY KEY,
