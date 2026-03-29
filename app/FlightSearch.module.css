@@ -1,0 +1,960 @@
+/* ─── Root ──────────────────────────────────────────────────────────────────── */
+.root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f0f4fb;
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────────────── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid #e0e7f5;
+  box-shadow: 0 2px 12px rgba(7, 112, 227, 0.08);
+}
+
+.headerInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 64px;
+}
+
+.logoArea {
+  flex-shrink: 0;
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0770e3;
+  letter-spacing: -0.5px;
+}
+
+/* Search summary (collapsed) */
+.searchSummary {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  padding: 10px 16px;
+  border: 2px solid #e0e7f5;
+  border-radius: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.searchSummary:hover {
+  border-color: #0770e3;
+  box-shadow: 0 0 0 3px rgba(7, 112, 227, 0.12);
+}
+
+.summaryRoute {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #111236;
+}
+
+.summaryAirport {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.summaryArrow {
+  font-size: 1.2rem;
+  color: #0770e3;
+}
+
+.summaryDetails {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #444a6d;
+}
+
+.editBtn {
+  margin-left: 8px;
+  background: #e8f1fd;
+  color: #0770e3;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.editBtn:hover {
+  background: #0770e3;
+  color: white;
+}
+
+/* Search form (expanded) */
+.searchForm {
+  flex: 1;
+  padding: 12px 0;
+}
+
+.formRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.formLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #8f9bba;
+  letter-spacing: 0.5px;
+}
+
+.formInput {
+  border: 1.5px solid #e0e7f5;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: #111236;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fff;
+  min-width: 80px;
+}
+.formInput:focus {
+  border-color: #0770e3;
+  box-shadow: 0 0 0 3px rgba(7, 112, 227, 0.12);
+}
+
+.swapBtn {
+  background: #e8f1fd;
+  border: none;
+  color: #0770e3;
+  font-size: 1.2rem;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.swapBtn:hover {
+  background: #0770e3;
+  color: white;
+  transform: rotate(180deg);
+}
+
+.searchBtn {
+  background: linear-gradient(135deg, #0770e3, #084eb8);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 12px rgba(7, 112, 227, 0.3);
+}
+.searchBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(7, 112, 227, 0.4);
+}
+
+/* ─── Hero Bar ────────────────────────────────────────────────────────────────── */
+.heroBar {
+  background: linear-gradient(135deg, #05203c 0%, #0770e3 60%, #00a698 100%);
+  padding: 32px 24px;
+  color: white;
+}
+
+.heroBarInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.heroRoute {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.heroAirport {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heroCode {
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.heroCity {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+.heroArrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 120px;
+}
+
+.heroArrowLine {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.4);
+}
+
+.heroArrowIcon {
+  font-size: 1.6rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  animation: planeFly 3s ease-in-out infinite;
+}
+
+@keyframes planeFly {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.heroMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0.9;
+}
+
+.heroMetaItem {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.heroMinPrice {
+  text-align: right;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 16px 24px;
+}
+
+.heroMinPrice strong {
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #ffee58;
+  text-shadow: 0 0 20px rgba(255,238,88,0.4);
+}
+
+.heroMinPriceSub {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* ─── Date Price Bars ─────────────────────────────────────────────────────────── */
+.dateBarsWrapper {
+  max-width: 1200px;
+  margin: 24px auto 0;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.datePriceBar {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e0e7f5;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(7, 112, 227, 0.06);
+}
+
+.datePriceLabel {
+  background: linear-gradient(90deg, #0770e3, #00a698);
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 6px 16px;
+  text-transform: uppercase;
+}
+
+.datePriceDates {
+  display: flex;
+  overflow-x: auto;
+  padding: 8px;
+  gap: 6px;
+  scrollbar-width: thin;
+}
+
+.dateBtn {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 14px;
+  border: 1.5px solid #e0e7f5;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 88px;
+}
+.dateBtn:hover {
+  border-color: #0770e3;
+  background: #e8f1fd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(7, 112, 227, 0.15);
+}
+
+.dateBtnSelected {
+  border-color: #0770e3 !important;
+  background: linear-gradient(135deg, #0770e3, #084eb8) !important;
+  color: white !important;
+  box-shadow: 0 4px 16px rgba(7, 112, 227, 0.35);
+}
+
+.dateBtnWeekend .dateBtnDate {
+  color: #e53935;
+}
+.dateBtnSelected .dateBtnDate {
+  color: white !important;
+}
+
+.dateBtnDate {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #111236;
+}
+
+.dateBtnPrice {
+  font-size: 0.75rem;
+  color: #0770e3;
+  font-weight: 700;
+}
+.dateBtnSelected .dateBtnPrice {
+  color: rgba(255,255,255,0.85);
+}
+
+/* ─── Filter Bar ──────────────────────────────────────────────────────────────── */
+.filterBar {
+  background: white;
+  border-bottom: 1px solid #e0e7f5;
+  position: sticky;
+  top: 64px;
+  z-index: 90;
+  box-shadow: 0 2px 8px rgba(7, 112, 227, 0.06);
+  margin-top: 16px;
+}
+
+.filterBarInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filterCheck {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #444a6d;
+}
+.filterCheck input {
+  width: 18px;
+  height: 18px;
+  accent-color: #0770e3;
+  cursor: pointer;
+}
+
+.filterDivider {
+  width: 1px;
+  height: 24px;
+  background: #e0e7f5;
+}
+
+.filterGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #8f9bba;
+}
+
+.filterChip {
+  padding: 5px 14px;
+  border: 1.5px solid #e0e7f5;
+  border-radius: 20px;
+  background: white;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #444a6d;
+  transition: all 0.18s;
+}
+.filterChip:hover {
+  border-color: #0770e3;
+  color: #0770e3;
+}
+.filterChipActive {
+  border-color: #0770e3 !important;
+  background: #0770e3 !important;
+  color: white !important;
+}
+
+.priceRange {
+  width: 120px;
+  accent-color: #0770e3;
+}
+
+.filterPrice {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0770e3;
+  min-width: 56px;
+}
+
+/* ─── Main ────────────────────────────────────────────────────────────────────── */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  flex: 1;
+  width: 100%;
+}
+
+.resultsMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  color: #444a6d;
+}
+
+.resultsCount {
+  font-weight: 700;
+  color: #0770e3;
+}
+
+.resultsDot {
+  color: #c8d5eb;
+}
+
+.resultsDate {
+  font-weight: 500;
+}
+
+.flightList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ─── Flight Card ─────────────────────────────────────────────────────────────── */
+.card {
+  background: white;
+  border-radius: 16px;
+  border: 1.5px solid #e0e7f5;
+  overflow: hidden;
+  transition: box-shadow 0.25s, border-color 0.25s, transform 0.2s;
+  position: relative;
+}
+.card:hover {
+  box-shadow: 0 8px 32px rgba(7, 112, 227, 0.12);
+  border-color: #0770e3;
+  transform: translateY(-2px);
+}
+.cardExpanded {
+  border-color: #0770e3;
+  box-shadow: 0 8px 32px rgba(7, 112, 227, 0.15);
+}
+
+.badge {
+  position: absolute;
+  top: 14px;
+  left: -2px;
+  padding: 3px 12px 3px 14px;
+  border-radius: 0 20px 20px 0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  z-index: 1;
+}
+
+.badgeBest {
+  background: linear-gradient(90deg, #0770e3, #00a698);
+  color: white;
+}
+
+.badgeFast {
+  background: linear-gradient(90deg, #ff6d00, #ffb700);
+  color: white;
+}
+
+.ecoBadge {
+  position: absolute;
+  top: 14px;
+  right: 160px;
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.seatsBadge {
+  position: absolute;
+  top: 40px;
+  right: 160px;
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  background: #fff3e0;
+  color: #e65100;
+  border-radius: 20px;
+  font-weight: 700;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.cardMain {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  gap: 24px;
+  cursor: pointer;
+}
+
+.cardFlights {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.flightRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.flightTimes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.depTime {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #111236;
+  min-width: 52px;
+}
+
+.arrTime {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #111236;
+  min-width: 68px;
+}
+
+.routeLine {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.routeLineBar {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #0770e3, #00a698);
+  border-radius: 2px;
+  position: relative;
+}
+.routeLineBar::before,
+.routeLineBar::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0770e3;
+}
+.routeLineBar::before { left: 0; }
+.routeLineBar::after { right: 0; background: #00a698; }
+
+.durationText {
+  font-size: 0.78rem;
+  color: #8f9bba;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+/* Airline icon */
+.airlineIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: white;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* Stops badge */
+.stopsDirect {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #00a698;
+  background: #e0f5f3;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.stopsLayover {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #ff6d00;
+  background: #fff3e0;
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+/* Price section */
+.cardPrice {
+  text-align: right;
+  min-width: 160px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.priceLabel {
+  font-size: 0.72rem;
+  color: #8f9bba;
+  font-weight: 500;
+}
+
+.priceAmount {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #0770e3;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.priceTotal {
+  font-size: 0.75rem;
+  color: #8f9bba;
+}
+
+.selectBtn {
+  margin-top: 8px;
+  background: linear-gradient(135deg, #0770e3, #084eb8);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 12px rgba(7, 112, 227, 0.3);
+  width: 100%;
+}
+.selectBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(7, 112, 227, 0.4);
+}
+
+/* Expand toggle */
+.expandToggle {
+  width: 100%;
+  padding: 8px;
+  background: #f8fafd;
+  border: none;
+  border-top: 1px solid #e0e7f5;
+  font-size: 0.78rem;
+  color: #8f9bba;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+.expandToggle:hover {
+  background: #e8f1fd;
+  color: #0770e3;
+}
+
+/* Card detail */
+.cardDetail {
+  padding: 20px 24px;
+  background: #f8fafd;
+  border-top: 1px solid #e0e7f5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: slideDown 0.25s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.segmentRow {
+  display: flex;
+  gap: 16px;
+}
+
+.segmentLabel {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #0770e3;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  min-width: 20px;
+  border-left: 3px solid #0770e3;
+  padding-left: 6px;
+}
+
+.segmentContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.segmentTimes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.timelineBar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.timelineLine {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #0770e3, #00a698);
+  border-radius: 2px;
+}
+
+.segmentMeta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: #8f9bba;
+}
+
+.flightNo {
+  font-weight: 700;
+  color: #444a6d;
+}
+
+.duration {
+  color: #0770e3;
+  font-weight: 600;
+}
+
+.aircraft {
+  background: #f0f4fb;
+  padding: 1px 8px;
+  border-radius: 10px;
+}
+
+/* ─── Loading ─────────────────────────────────────────────────────────────────── */
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  gap: 20px;
+}
+
+.loadingPlane {
+  font-size: 3rem;
+  animation: planeFly 1.5s ease-in-out infinite;
+}
+
+.loadingText {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #444a6d;
+}
+
+.loadingBars {
+  display: flex;
+  gap: 6px;
+}
+
+.loadingBar {
+  width: 8px;
+  height: 32px;
+  background: linear-gradient(180deg, #0770e3, #00a698);
+  border-radius: 4px;
+  animation: loadingPulse 1s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { transform: scaleY(0.5); opacity: 0.5; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+/* ─── Empty State ─────────────────────────────────────────────────────────────── */
+.emptyState {
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #111236;
+  margin-bottom: 8px;
+}
+
+.emptyDesc {
+  font-size: 1rem;
+  color: #8f9bba;
+}
+
+/* ─── Footer ──────────────────────────────────────────────────────────────────── */
+.footer {
+  background: #05203c;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 24px;
+  font-size: 0.82rem;
+  margin-top: auto;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .headerInner {
+    padding: 0 16px;
+    flex-wrap: wrap;
+    min-height: auto;
+  }
+
+  .heroBarInner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .heroCode {
+    font-size: 1.8rem;
+  }
+
+  .heroMinPrice {
+    width: 100%;
+    text-align: left;
+  }
+
+  .heroMinPrice strong {
+    font-size: 1.5rem;
+  }
+
+  .cardMain {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cardPrice {
+    align-items: flex-start;
+    min-width: auto;
+    border-top: 1px solid #e0e7f5;
+    padding-top: 16px;
+  }
+
+  .datePriceDates {
+    flex-wrap: nowrap;
+  }
+
+  .formRow {
+    gap: 8px;
+  }
+
+  .ecoBadge, .seatsBadge {
+    position: static;
+    display: inline-block;
+    margin: 4px;
+  }
+
+  .filterBarInner {
+    padding: 10px 16px;
+    gap: 10px;
+  }
+}
