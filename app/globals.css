@@ -1,13 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary: #0770e3;
-  --primary-hover: #084eb8;
-  --bg-light: #f4f7fb;
+  --primary: #c5a059; /* Mustard/Gold */
+  --primary-hover: #b08d4c;
+  --secondary: #1e293b; /* Navy / Dark blue-gray */
+  --bg-light: #f9f7f2; /* Cream background */
   --bg-card: #ffffff;
-  --text-main: #111236;
-  --text-muted: #8f9bba;
-  --nav-bg: rgba(255, 255, 255, 0.9);
+  --text-main: #2c2c2c;
+  --text-muted: #6b7280;
+  --nav-bg: rgba(249, 247, 242, 0.95);
+  --border-color: #e5e0d8;
 }
 
 * {
@@ -17,20 +19,64 @@
 }
 
 body {
-  font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: var(--bg-light);
   color: var(--text-main);
   min-height: 100vh;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--border-color) var(--bg-light);
 }
 
-/* Glassmorphism helpers */
+body::-webkit-scrollbar {
+  width: 6px;
+}
+body::-webkit-scrollbar-track {
+  background: var(--bg-light); 
+}
+body::-webkit-scrollbar-thumb {
+  background: var(--border-color); 
+  border-radius: 10px;
+}
+
+.container {
+  max-width: 480px; 
+  margin: 0 auto;
+  padding: 20px 24px 80px 24px; 
+  background-color: var(--bg-light);
+  min-height: 100vh;
+  box-shadow: 0 0 30px rgba(0,0,0,0.05); 
+  transition: all 0.3s ease;
+}
+
+/* 💻 Desktop View Enhancements */
+@media (min-width: 768px) {
+  .container {
+    max-width: 1024px; /* Expand securely for desktop */
+    padding: 30px 40px 60px 40px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.03);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    /* Option to add a top/bottom margin for floating app feel on large screens */
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+    margin: 2rem auto; /* Float effect */
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    min-height: calc(100vh - 4rem);
+  }
+}
+
+/* Glassmorphism/Card helpers -> 모던 에디토리얼 평면 카드로 전환 */
 .glass {
   background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 /* Base styles */
@@ -43,53 +89,90 @@ input, button, select, textarea {
 }
 button {
   cursor: pointer;
-  background-color: var(--primary);
+  background-color: var(--secondary);
   color: #ffffff;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-weight: 600;
-  transition: background-color 0.2s;
+  border-radius: 9999px; /* 알약 형태 (Capsule) */
+  padding: 12px 24px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 button:hover {
-  background-color: var(--primary-hover);
+  background-color: #0f172a;
+  transform: translateY(-1px);
 }
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .btn-outline {
   background: transparent;
-  color: var(--primary);
-  border: 1px solid var(--primary);
+  color: var(--secondary);
+  border: 1px solid var(--border-color);
 }
 .btn-outline:hover {
-  background: rgba(7, 112, 227, 0.05);
+  background: rgba(30, 41, 59, 0.05);
+  border-color: var(--secondary);
+}
+
+/* Primary Color Button Override (For Gold Actions) */
+.btn-primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
 }
 
 .input-field {
   width: 100%;
-  padding: 12px;
+  padding: 14px 16px;
   background: #ffffff;
-  border: 1px solid #e0e7f5;
-  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
   color: var(--text-main);
-  margin-top: 8px;
+  font-size: 0.95rem;
+  margin-top: 6px;
   margin-bottom: 20px;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.02);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input-field:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(7, 112, 227, 0.12);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1);
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+/* Typography styles */
+h1, h2, h3, h4, h5, h6, .page-title, .serif {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--secondary);
+  font-weight: 600;
 }
 
-/* App Level Utilities */
 .page-title {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: 700;
-  margin-bottom: 2rem;
-  color: var(--primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Helpers */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: rgba(197, 160, 89, 0.1);
+  color: var(--primary-hover);
 }

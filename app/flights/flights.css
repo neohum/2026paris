@@ -6,29 +6,40 @@
   padding: 1.5rem 2rem;
   margin-bottom: 2rem;
   border-left: 4px solid var(--primary);
-  background: rgba(201, 162, 39, 0.1);
+  background: rgba(197, 160, 89, 0.05); /* very subtle mustard */
+  border-radius: 12px;
 }
 
 .summary-banner h2 {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   margin-bottom: 0.5rem;
-  color: var(--primary);
+  color: var(--secondary);
+  font-family: 'Cormorant Garamond', serif;
+}
+.summary-banner p {
+  color: var(--text-main);
+  line-height: 1.6;
+  font-size: 0.95rem;
 }
 
 .flight-controls {
-  padding: 1.5rem 2rem;
+  padding: 1.5rem;
+  border-radius: 16px;
 }
 
 .flight-input {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 8px 12px;
-  color: #fff;
-  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 12px 16px;
+  color: var(--text-main);
+  border-radius: 99px; /* Pill shapes for inputs */
   outline: none;
+  font-size: 0.95rem;
+  width: 100%;
 }
 .flight-input:focus {
   border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.1);
 }
 
 .mb-2 {
@@ -36,9 +47,16 @@
 }
 
 .flight-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .flight-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
 }
 
 .flight-card {
@@ -47,16 +65,19 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.2s, box-shadow 0.2s;
+  background-color: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
 }
 
 .flight-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
 }
 
 .flight-card.recommended {
   border: 1px solid var(--primary);
-  background: linear-gradient(145deg, rgba(201,162,39,0.08), rgba(255,255,255,0.02));
+  background: #fdfbf7;
 }
 
 .badge {
@@ -64,23 +85,30 @@
   top: -12px;
   left: 20px;
   background: var(--primary);
-  color: #000;
-  padding: 4px 12px;
+  color: #fff;
+  padding: 6px 16px;
   border-radius: 20px;
-  font-weight: 800;
-  font-size: 0.85rem;
-  box-shadow: 0 4px 10px rgba(201,162,39,0.4);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(197,160,89,0.2);
 }
 
 .flight-type {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
   color: var(--text-muted);
   margin-bottom: 0.5rem;
 }
 
 .flight-airline {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   margin-bottom: 1.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--secondary);
 }
 
 .flight-details {
@@ -90,21 +118,26 @@
 }
 
 .flight-details td {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
 }
 .flight-details tr:last-child td {
   border-bottom: none;
 }
 .flight-details td:first-child {
   color: var(--text-muted);
-  width: 40%;
+  width: 35%;
+  font-size: 0.9rem;
+}
+.flight-details td:last-child {
+  color: var(--text-main);
+  text-align: right;
 }
 
 .flight-price {
-  color: var(--primary);
+  color: var(--primary) !important;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.25rem !important;
 }
 
 .flight-features {
@@ -117,23 +150,27 @@
 .flight-features li {
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
-  color: #d1d5db;
-  line-height: 1.4;
+  color: var(--text-muted);
+  line-height: 1.5;
+  display: flex;
+  gap: 8px;
 }
 
 .skyscanner-btn {
-  display: block;
-  text-align: center;
-  background-color: var(--primary);
-  color: #0f111a;
-  border-radius: 8px;
-  padding: 12px;
-  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary);
+  color: #fff;
+  border-radius: 99px;
+  padding: 14px;
+  font-weight: 500;
+  font-size: 0.95rem;
   transition: all 0.2s;
   text-decoration: none;
 }
 
 .skyscanner-btn:hover {
-  background-color: var(--primary-hover);
-  transform: scale(1.02);
+  background-color: #0f172a;
+  transform: translateY(-1px);
 }

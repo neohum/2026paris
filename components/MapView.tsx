@@ -132,10 +132,18 @@ export default function MapView({
           >
             <Popup>
               <div style={{ padding: '5px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '5px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px', marginBottom: '5px', flexWrap: 'wrap' }}>
                   {place.place_type === 'accommodation' && <span style={{ background: '#10b981', color: 'white', padding: '2px 6px', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 'bold' }}>숙소</span>}
                   {place.place_type === 'recommended' && <span style={{ background: '#f59e0b', color: 'white', padding: '2px 6px', borderRadius: '4px', fontSize: '0.7rem', fontWeight: 'bold' }}>유저 추천</span>}
-                  <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#333' }}>{place.name}</h3>
+                  <a 
+                    href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lng}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ margin: 0, fontSize: '1.2rem', color: '#0ea5e9', textDecoration: 'underline', fontWeight: 'bold', cursor: 'pointer' }}
+                    title="구글 지도 검색"
+                  >
+                    {place.name} 🔗
+                  </a>
                 </div>
                 <p style={{ margin: '0 0 5px', fontSize: '0.9rem', color: '#666' }}>
                   <strong>날짜:</strong> {place.visit_date ? new Date(place.visit_date).toLocaleDateString() : '지정안됨'} (Day {place.day_number})

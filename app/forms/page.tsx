@@ -87,72 +87,73 @@ export default function FormsPage() {
   };
 
   return (
-    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <h1 className="page-title">📝 여행자 정보 입력</h1>
-      <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>원활한 렌터카 및 항공 투어를 위해 정확한 여권 정보를 입력해주세요.</p>
+    <div style={{ maxWidth: '800px', margin: '0 auto', paddingBottom: '4rem' }}>
+      <h1 className="page-title">📝 여행자 정보 안전 관리</h1>
+      <p style={{ color: 'var(--text-muted)', marginBottom: '2.5rem', lineHeight: 1.6 }}>항공권 발권 및 현지 렌터카 예약을 위해 정확한 여권 정보를 제출해 주세요.</p>
 
-      <form onSubmit={handleSubmit} className="glass" style={{ padding: '2rem' }}>
+      <form onSubmit={handleSubmit} className="glass" style={{ padding: '2rem', border: '1px solid var(--border-color)', background: 'var(--bg-card)' }}>
         
-        <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column', marginBottom: '1.5rem' }}>
-          <h3>여권 사본 업로드</h3>
+        <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column', marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: '1px solid var(--border-color)' }}>
+          <h3 style={{ fontSize: '1.15rem', color: 'var(--secondary)', marginBottom: '0.5rem' }}>1. 여권 사본 업로드</h3>
           {existingPhoto && !preview && (
-             <div style={{ marginBottom: '1rem' }}>
-               <p style={{ color: 'var(--primary)', marginBottom: '0.5rem' }}>현재 저장된 여권 사진:</p>
+             <div style={{ marginBottom: '1rem', background: '#fdfbf7', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(197, 160, 89, 0.2)' }}>
+               <p style={{ color: 'var(--primary)', marginBottom: '0.8rem', fontSize: '0.9rem', fontWeight: 600 }}>✅ 현재 업로드되어 있는 여권 사본</p>
                <Image src={existingPhoto} alt="여권" width={300} height={200} style={{ objectFit: 'contain', borderRadius: '8px' }} />
              </div>
           )}
           {preview && (
-            <div style={{ marginBottom: '1rem' }}>
-              <p style={{ color: '#10b981', marginBottom: '0.5rem' }}>새로 업로드할 사진 미리보기:</p>
+            <div style={{ marginBottom: '1rem', background: 'rgba(16, 185, 129, 0.05)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
+              <p style={{ color: '#10b981', marginBottom: '0.8rem', fontSize: '0.9rem', fontWeight: 600 }}>✅ 새로 선택한 이미지 미리보기</p>
               <Image src={preview} alt="미리보기" width={300} height={200} style={{ objectFit: 'contain', borderRadius: '8px' }} />
             </div>
           )}
-          <input type="file" accept="image/jpeg, image/png, application/pdf" onChange={handleFileChange} className="input-field" style={{ marginBottom: 0 }} />
-          <small style={{ color: 'var(--text-muted)' }}>* JPG, PNG 파일 형식 (최대 5MB)</small>
+          <input type="file" accept="image/jpeg, image/png, application/pdf" onChange={handleFileChange} className="flight-input" style={{ marginBottom: 0 }} />
+          <small style={{ color: 'var(--text-muted)' }}>* JPG, PNG 파일 형식 (최대 5MB, 빛반사 없이 선명하게)</small>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+        <h3 style={{ fontSize: '1.15rem', color: 'var(--secondary)', marginBottom: '1.5rem' }}>2. 여권 세부 정보 입력</h3>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.2rem', marginBottom: '1.2rem' }}>
           <div>
-            <label>영문 성 (Last Name) *</label>
-            <input type="text" name="passportLastName" value={formData.passportLastName} onChange={handleChange} className="input-field" required placeholder="예: HONG" style={{ textTransform: 'uppercase' }} />
+            <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>영문 성 (Last Name) *</label>
+            <input type="text" name="passportLastName" value={formData.passportLastName} onChange={handleChange} className="flight-input" required placeholder="예: HONG" style={{ textTransform: 'uppercase' }} />
           </div>
           <div>
-            <label>영문 이름 (First Name) *</label>
-            <input type="text" name="passportFirstName" value={formData.passportFirstName} onChange={handleChange} className="input-field" required placeholder="예: GILDONG" style={{ textTransform: 'uppercase' }} />
-          </div>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-          <div>
-            <label>여권 번호 *</label>
-            <input type="text" name="passportNumber" value={formData.passportNumber} onChange={handleChange} className="input-field" required placeholder="예: M12345678" style={{ textTransform: 'uppercase' }} />
-          </div>
-          <div>
-            <label>여권 만료일 *</label>
-            <input type="date" name="passportExpiry" value={formData.passportExpiry} onChange={handleChange} className="input-field" required />
+            <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>영문 이름 (First Name) *</label>
+            <input type="text" name="passportFirstName" value={formData.passportFirstName} onChange={handleChange} className="flight-input" required placeholder="예: GILDONG" style={{ textTransform: 'uppercase' }} />
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.2rem', marginBottom: '1.2rem' }}>
           <div>
-            <label>생년월일 *</label>
-            <input type="date" name="birthDate" value={formData.birthDate} onChange={handleChange} className="input-field" required />
+            <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>여권 번호 *</label>
+            <input type="text" name="passportNumber" value={formData.passportNumber} onChange={handleChange} className="flight-input" required placeholder="예: M12345678" style={{ textTransform: 'uppercase' }} />
           </div>
           <div>
-            <label>비상 연락처 (한국) *</label>
-            <input type="text" name="emergencyContact" value={formData.emergencyContact} onChange={handleChange} className="input-field" required placeholder="예: 010-1234-5678 (가족)" />
+            <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>여권 만료일 *</label>
+            <input type="date" name="passportExpiry" value={formData.passportExpiry} onChange={handleChange} className="flight-input" required />
           </div>
         </div>
 
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label>특이사항 (건강상태, 알레르기 등)</label>
-          <textarea name="notes" value={formData.notes} onChange={handleChange} className="input-field" rows={4} placeholder="해당사항이 있다면 작성해주세요." style={{ resize: 'none' }}></textarea>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.2rem', marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: '1px solid var(--border-color)' }}>
+          <div>
+            <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>생년월일 *</label>
+            <input type="date" name="birthDate" value={formData.birthDate} onChange={handleChange} className="flight-input" required />
+          </div>
+          <div>
+            <label style={{ display: 'block', fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>비상 연락처 (한국 내 가족/지인) *</label>
+            <input type="text" name="emergencyContact" value={formData.emergencyContact} onChange={handleChange} className="flight-input" required placeholder="예: 010-1234-5678" />
+          </div>
         </div>
 
-        {status.error && <div style={{ color: '#ef4444', marginBottom: '1rem' }}>{status.error}</div>}
-        {status.success && <div style={{ color: '#10b981', marginBottom: '1rem' }}>저장되었습니다.</div>}
+        <div style={{ marginBottom: '2rem' }}>
+          <h3 style={{ fontSize: '1.15rem', color: 'var(--secondary)', marginBottom: '1rem' }}>3. 기타 특이사항 (선택)</h3>
+          <textarea name="notes" value={formData.notes} onChange={handleChange} className="flight-input" rows={4} placeholder="비행기 식사 알레르기, 건강상 주의가 필요한 부분이 있다면 알려주세요." style={{ resize: 'none' }}></textarea>
+        </div>
 
-        <button type="submit" disabled={status.loading} style={{ width: '100%', fontSize: '1.1rem' }}>
+        {status.error && <div style={{ color: '#ef4444', marginBottom: '1rem', fontWeight: 500, padding: '10px', background: 'rgba(239, 68, 68, 0.1)', borderRadius: '8px' }}>❌ {status.error}</div>}
+        {status.success && <div style={{ color: '#10b981', marginBottom: '1rem', fontWeight: 500, padding: '10px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '8px' }}>✅ 안전하게 저장되었습니다.</div>}
+
+        <button type="submit" disabled={status.loading} className="btn-primary" style={{ width: '100%', padding: '16px', fontSize: '1.1rem' }}>
           {status.loading ? '저장 중...' : '정보 저장하기'}
         </button>
       </form>

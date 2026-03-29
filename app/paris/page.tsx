@@ -8,41 +8,33 @@ interface VoteStats {
 }
 
 export default function GeneralPollingPage() {
-  // 파리 시내 투표 상태
   const [counts, setCounts] = useState<VoteStats>({ 1: 0, 2: 0, 3: 0 });
   const [myVote, setMyVote] = useState<number | null>(null);
   
-  // 렌터카 코스 투표 상태
   const [courseCounts, setCourseCounts] = useState<VoteStats>({ 1: 0, 2: 0, 3: 0 });
   const [myCourseVote, setMyCourseVote] = useState<number | null>(null);
   const [courses, setCourses] = useState<any[]>([]);
 
-  // 아코디언 상태
   const [expandedParis, setExpandedParis] = useState<Record<number, boolean>>({});
   const [expandedCourse, setExpandedCourse] = useState<Record<number, boolean>>({});
-
   const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      // 파리 투표 가져오기
       fetch('/api/paris-vote').then(res => res.json()).then(data => {
         if (data.counts) setCounts(data.counts);
         if (data.currentVote) setMyVote(data.currentVote);
       });
 
-      // 렌터카 투표 가져오기
       fetch('/api/course-vote').then(res => res.json()).then(data => {
         if (data.counts) setCourseCounts(data.counts);
         if (data.currentVote) setMyCourseVote(data.currentVote);
       });
 
-      // 코스 정보 가져오기
       fetch('/api/courses').then(res => res.json()).then(data => {
         if (Array.isArray(data)) setCourses(data);
       });
-
     } catch (e) {
       console.error(e);
     } finally {
@@ -54,15 +46,9 @@ export default function GeneralPollingPage() {
     fetchData();
   }, []);
 
-  const toggleParis = (id: number) => {
-    setExpandedParis(prev => ({ ...prev, [id]: !prev[id] }));
-  };
+  const toggleParis = (id: number) => setExpandedParis(prev => ({ ...prev, [id]: !prev[id] }));
+  const toggleCourse = (id: number) => setExpandedCourse(prev => ({ ...prev, [id]: !prev[id] }));
 
-  const toggleCourse = (id: number) => {
-    setExpandedCourse(prev => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  // 파리 투표 핸들러
   const handleVote = async (optionId: number) => {
     setLoading(true);
     try {
@@ -87,7 +73,6 @@ export default function GeneralPollingPage() {
     }
   };
 
-  // 렌터카 투표 핸들러
   const handleCourseVote = async (courseId: number) => {
     setLoading(true);
     try {
@@ -112,7 +97,6 @@ export default function GeneralPollingPage() {
     }
   };
 
-  // 백분율 계산 유틸
   const totalVotes = Object.values(counts).reduce((a, b) => a + b, 0);
   const getPercentage = (optionId: number) => {
     if (totalVotes === 0) return 0;
@@ -128,35 +112,31 @@ export default function GeneralPollingPage() {
 
   return (
     <div className="paris-container">
-      <h1 className="page-title">🇫🇷 전체 투어 일정 설문조사</h1>
-      <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>여행 파티원들의 취향을 수합하여 전체 일정을 확정합니다.</p>
+      <h1 className="page-title">전체 일정 투표</h1>
+      <p style={{ color: 'var(--text-muted)', marginBottom: '2.5rem', lineHeight: '1.6' }}>여행 파티원들의 취향을 수합하여 파리 및 렌터카 전체 일정을 조율합니다.</p>
 
-      {/* ─────────────────────────────────────────────────────────────
-          섹션 1: 파리 시내 일정 투표 
-          ───────────────────────────────────────────────────────────── */}
-      <div style={{ background: 'rgba(59, 130, 246, 0.05)', padding: '1.5rem', borderRadius: '16px', marginBottom: '3rem', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
-        <h2 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--text-main)' }}>🗼 [PART 1] 파리 시내 투어 옵션</h2>
+      {/* 파리 시내 일정 투표 */}
+      <div style={{ padding: '2rem 1.5rem', borderRadius: '16px', marginBottom: '3rem', border: '1px solid var(--border-color)', background: '#fff' }}>
+        <h2 style={{ fontSize: '1.4rem', marginBottom: '1.5rem', color: 'var(--secondary)', fontFamily: "'Cormorant Garamond', serif" }}>[PART 1] 파리 시내 일정</h2>
 
-        <div className="info-panel glass">
-          <h3 style={{ color: 'var(--primary)', marginBottom: '1rem', fontSize: '1.2rem' }}>💡 팁: 루브르와 오르세를 다른 날로 나눈 이유는?</h3>
-          <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', lineHeight: '1.8', fontSize: '1rem' }}>
-            <li><strong>박물관 피로 (Museum Fatigue):</strong> 엄청난 규모의 루브르 관람만으로도 하루 평균 1만 보 이상 걷습니다. 연달아 미술관을 가면 체력 고갈로 감동이 반감됩니다.</li>
-            <li><strong>동선 분산과 힐링 배분:</strong> 무거운 관람은 오전으로 빼고, 오후는 유람선이나 산책 등 가벼운 일정과 혼합해야 일상에 무리가 없습니다.</li>
+        <div className="info-panel">
+          <h2 style={{ fontSize: '1.15rem', marginBottom: '0.8rem' }}>💡 팁: 루브르와 오르세를 다른 날로 나눈 이유</h2>
+          <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', lineHeight: '1.6', fontSize: '0.95rem', color: 'var(--text-main)' }}>
+            <li style={{ marginBottom: '0.5rem' }}><strong>박물관 피로:</strong> 엄청난 규모의 루브르 관람만으로도 하루 평균 1만 보 이상 걷습니다. 연달아 미술관을 가면 체력 고갈로 감동이 반감됩니다.</li>
+            <li><strong>동선 분산:</strong> 무거운 관람은 오전으로 빼고, 오후는 유람선이나 산책 등 가벼운 일정과 혼합해야 무리가 없습니다.</li>
           </ul>
         </div>
 
         {/* 옵션 1 */}
-        <div className={`paris-card glass ${myVote === 1 ? 'voted' : ''}`}>
+        <div className="paris-grid">
+        <div className={`paris-card ${myVote === 1 ? 'voted' : ''}`}>
           <div className="option-title">
-            <h3 
-              onClick={() => toggleParis(1)} 
-              style={{ fontSize: '1.3rem', color: myVote === 1 ? '#10b981' : 'var(--primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', userSelect: 'none' }}
-            >
-              옵션 A: 미술관 & 낭만 힐링 (여유)
+            <h2 onClick={() => toggleParis(1)} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', userSelect: 'none' }}>
+              옵션 A: 미술관 & 낭만 힐링
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', transition: 'transform 0.2s', transform: expandedParis[1] ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
-            </h3>
+            </h2>
             <button className={`vote-btn ${myVote === 1 ? 'active' : ''}`} onClick={() => handleVote(1)} disabled={loading}>
-              {myVote === 1 ? '✅ 투표 완료' : '이 코스로 투표'}
+              {myVote === 1 ? '투표 완료' : '선택하기'}
             </button>
           </div>
           {expandedParis[1] && (
@@ -166,24 +146,21 @@ export default function GeneralPollingPage() {
             </ul>
           )}
           <div className="gauge-bar-wrapper">
-            <div className="gauge-bar" style={{ width: `${getPercentage(1)}%`, background: myVote === 1 ? '#10b981' : 'var(--primary)' }}>
-              {getPercentage(1)}% ({counts[1]}표)
+            <div className="gauge-bar" style={{ width: `${getPercentage(1)}%` }}>
+              {getPercentage(1)}%
             </div>
           </div>
         </div>
 
         {/* 옵션 2 */}
-        <div className={`paris-card glass ${myVote === 2 ? 'voted' : ''}`}>
+        <div className={`paris-card ${myVote === 2 ? 'voted' : ''}`}>
           <div className="option-title">
-            <h3 
-              onClick={() => toggleParis(2)} 
-              style={{ fontSize: '1.3rem', color: myVote === 2 ? '#10b981' : 'var(--primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', userSelect: 'none' }}
-            >
-              옵션 B: 핵심 랜드마크 인증샷 (압축)
+            <h2 onClick={() => toggleParis(2)} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', userSelect: 'none' }}>
+              옵션 B: 핵심 랜드마크 압축
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', transition: 'transform 0.2s', transform: expandedParis[2] ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
-            </h3>
+            </h2>
             <button className={`vote-btn ${myVote === 2 ? 'active' : ''}`} onClick={() => handleVote(2)} disabled={loading}>
-              {myVote === 2 ? '✅ 투표 완료' : '이 코스로 투표'}
+              {myVote === 2 ? '투표 완료' : '선택하기'}
             </button>
           </div>
           {expandedParis[2] && (
@@ -193,85 +170,73 @@ export default function GeneralPollingPage() {
             </ul>
           )}
           <div className="gauge-bar-wrapper">
-            <div className="gauge-bar" style={{ width: `${getPercentage(2)}%`, background: myVote === 2 ? '#10b981' : 'var(--primary)' }}>
-              {getPercentage(2)}% ({counts[2]}표)
+            <div className="gauge-bar" style={{ width: `${getPercentage(2)}%` }}>
+              {getPercentage(2)}%
             </div>
           </div>
         </div>
 
         {/* 옵션 3 */}
-        <div className={`paris-card glass ${myVote === 3 ? 'voted' : ''}`}>
+        <div className={`paris-card ${myVote === 3 ? 'voted' : ''}`}>
           <div className="option-title">
-            <h3 
-              onClick={() => toggleParis(3)} 
-              style={{ fontSize: '1.3rem', color: myVote === 3 ? '#10b981' : 'var(--primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', userSelect: 'none' }}
-            >
-              옵션 C: 로컬 미식 & 쇼핑 집중 (트렌디)
+            <h2 onClick={() => toggleParis(3)} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', userSelect: 'none' }}>
+              옵션 C: 미식 & 쇼핑 집중
               <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', transition: 'transform 0.2s', transform: expandedParis[3] ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
-            </h3>
+            </h2>
             <button className={`vote-btn ${myVote === 3 ? 'active' : ''}`} onClick={() => handleVote(3)} disabled={loading}>
-              {myVote === 3 ? '✅ 투표 완료' : '이 코스로 투표'}
+              {myVote === 3 ? '투표 완료' : '선택하기'}
             </button>
           </div>
           {expandedParis[3] && (
             <ul className="day-list" style={{ marginTop: '1rem' }}>
-              <li><span className="day-label">1일차</span> 오르세 미술관(가이드 투어) → 파리 갤러리 라파예트 백화점 주변 쇼핑 → 마레지구 저녁 다이닝</li>
-              <li><span className="day-label">2일차</span> 루브르 박물관 오전 관람 → 피카소 미술관 주변 로컬 카페 → 몽마르뜨 언덕 일몰 산책</li>
+              <li><span className="day-label">1일차</span> 오르세 가이드 투어 → 라파예트 백화점 주변 쇼핑 → 마레지구 다이닝</li>
+              <li><span className="day-label">2일차</span> 루브르 박물관 오전 관람 → 피카소 미술관 주변 로컬 카페 → 몽마르뜨 언덕 일몰</li>
             </ul>
           )}
           <div className="gauge-bar-wrapper">
-            <div className="gauge-bar" style={{ width: `${getPercentage(3)}%`, background: myVote === 3 ? '#10b981' : 'var(--primary)' }}>
-              {getPercentage(3)}% ({counts[3]}표)
+            <div className="gauge-bar" style={{ width: `${getPercentage(3)}%` }}>
+              {getPercentage(3)}%
             </div>
           </div>
         </div>
+        </div>
       </div>
 
-      {/* ─────────────────────────────────────────────────────────────
-          섹션 2: 렌터카 투어 투표
-          ───────────────────────────────────────────────────────────── */}
-      <div style={{ background: 'rgba(245, 158, 11, 0.05)', padding: '1.5rem', borderRadius: '16px', border: '1px solid rgba(245, 158, 11, 0.2)' }}>
-        <h2 style={{ fontSize: '1.4rem', marginBottom: '0.5rem', color: 'var(--text-main)' }}>🚗 [PART 2] 프랑스 근교 렌터카 코스 투표</h2>
-        <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.95rem' }}>
-          자세한 동선 및 목적지 정보는 <a href="/map" style={{color: '#f59e0b', textDecoration: 'underline'}}>지도 & 일정</a> 메뉴에서 확인하신 후 투표해 주세요.
-        </p>
+      {/* 렌터카 일주 투표 */}
+      <div style={{ padding: '2rem 1.5rem', borderRadius: '16px', border: '1px solid var(--border-color)', background: '#fff' }}>
+        <h2 style={{ fontSize: '1.4rem', marginBottom: '0.5rem', color: 'var(--secondary)', fontFamily: "'Cormorant Garamond', serif" }}>[PART 2] 프랑스 근교 렌터카 코스</h2>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', fontSize: '0.95rem' }}>자세한 동선은 일정 탭의 <a href="/map" style={{ color: 'var(--secondary)', textDecoration: 'underline' }}>지도</a>에서 확인하신 후 투표해 주세요.</p>
 
-        {courses.length === 0 && <div style={{ padding: '2rem', textAlign: 'center' }}>코스 정보를 불러오는 중입니다...</div>}
+        {courses.length === 0 && <div style={{ padding: '2rem', textAlign: 'center' }}>코스 로딩 중...</div>}
         
+        <div className="paris-grid">
         {courses.map(course => {
           const isVoted = myCourseVote === course.id;
-          const themeColor = course.color || '#f59e0b';
           
           return (
-            <div key={course.id} className={`paris-card glass ${isVoted ? 'voted' : ''}`} style={isVoted ? { borderColor: '#10b981' } : {}}>
+            <div key={course.id} className={`paris-card ${isVoted ? 'voted' : ''}`}>
               <div className="option-title">
-                <h3 
+                <h2 
                   onClick={() => toggleCourse(course.id)}
-                  style={{ fontSize: '1.3rem', color: isVoted ? '#10b981' : themeColor, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', userSelect: 'none' }}
+                  style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', userSelect: 'none' }}
                 >
                   {course.name}
                   <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', transition: 'transform 0.2s', transform: expandedCourse[course.id] ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
-                </h3>
-                <button 
-                  className={`vote-btn ${isVoted ? 'active' : ''}`} 
-                  onClick={() => handleCourseVote(course.id)} 
-                  disabled={loading}
-                  style={!isVoted ? { background: themeColor } : {}}
-                >
-                  {isVoted ? '✅ 투표 완료' : '이 코스로 투표'}
+                </h2>
+                <button className={`vote-btn ${isVoted ? 'active' : ''}`} onClick={() => handleCourseVote(course.id)} disabled={loading}>
+                  {isVoted ? '투표 완료' : '선택하기'}
                 </button>
               </div>
               
               {expandedCourse[course.id] && (
-                <div style={{ marginTop: '1rem', marginBottom: '1rem', background: 'rgba(255,255,255,0.02)', padding: '1rem', borderRadius: '8px' }}>
-                  <h4 style={{ fontSize: '0.95rem', color: themeColor, marginBottom: '0.5rem' }}>전체 방문 일정:</h4>
+                <div style={{ marginTop: '1rem', marginBottom: '1rem', background: 'var(--bg-light)', padding: '1rem', borderRadius: '12px' }}>
+                  <h4 style={{ fontSize: '0.95rem', color: 'var(--secondary)', marginBottom: '0.8rem' }}>전체 방문 일정:</h4>
                   <ul className="day-list">
                     {course.places.map((p:any) => (
                       <li key={p.id}>
-                        <span className="day-label" style={{ background: themeColor }}>Day {p.day_number}</span> 
-                        <strong>{p.name}</strong> 
-                        <br/>
-                        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>{p.description}</span>
+                        <span className="day-label">Day {p.day_number}</span> 
+                        <strong style={{ color: 'var(--text-main)' }}>{p.name}</strong> 
+                        <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)', display: 'block', marginTop: '4px' }}>{p.description}</span>
                       </li>
                     ))}
                   </ul>
@@ -279,13 +244,14 @@ export default function GeneralPollingPage() {
               )}
               
               <div className="gauge-bar-wrapper">
-                <div className="gauge-bar" style={{ width: `${getCoursePercentage(course.id)}%`, background: isVoted ? '#10b981' : themeColor }}>
-                  {getCoursePercentage(course.id)}% ({(courseCounts[course.id] || 0)}표)
+                <div className="gauge-bar" style={{ width: `${getCoursePercentage(course.id)}%` }}>
+                  {getCoursePercentage(course.id)}%
                 </div>
               </div>
             </div>
           );
         })}
+        </div>
       </div>
 
     </div>
