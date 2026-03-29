@@ -19,8 +19,8 @@ const defaultItems: CheckItem[] = [
   { id: 'doc-4', category: '여권 및 서류 🛂', label: '국제 운전 면허증 및 국내 면허증', desc: '렌터카 운전자 필수', checked: false },
 
   // 전자기기
-  { id: 'elec-1', category: '전자기기 📱', label: '해외 로밍 / 유심 / eSIM', desc: '미리 구매 및 세팅 방법 캡처 필수', checked: false },
-  { id: 'elec-2', category: '전자기기 📱', label: '멀티 어댑터 및 멀티탭', desc: '프랑스는 220V지만 콘센트 구멍 크기가 달라 안 꽂히는 한국 플러그 존재', checked: false },
+  { id: 'elec-1', category: '전자기기 📱', label: '해외 로밍 / 유심 / eSIM', desc: '미리 구매 필요없음 현지에서 구매/로밍은 비쌈', checked: false },
+  { id: 'elec-2', category: '전자기기 📱', label: '충전용 플러그', checked: false },
   { id: 'elec-4', category: '전자기기 📱', label: '충전 케이블 (C타입, 라이트닝 넉넉히)', checked: false },
 
   // 의류 및 뷰티
@@ -51,6 +51,10 @@ export default function ChecklistPage() {
       if (saved) {
         try {
           localItems = JSON.parse(saved);
+          // 과거에 이미 캐시된 기기(브라우저)에서 삭제된 항목들을 강제로 도려냅니다.
+          localItems = localItems.filter((i: CheckItem) => 
+            !['doc-2', 'doc-3', 'doc-5'].includes(i.id)
+          );
         } catch(e) {}
       }
 
@@ -149,7 +153,19 @@ export default function ChecklistPage() {
   return (
     <div className="checklist-container">
       <h1 className="page-title">준비물 리스트</h1>
-      <p style={{ color: 'var(--text-muted)', marginBottom: '2.5rem', lineHeight: 1.6 }}>프랑스 여행을 떠나기 전 개인 짐가방 진행도를 체크하세요.</p>
+      <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: 1.6 }}>프랑스 여행을 떠나기 전 개인 짐가방 진행도를 체크하세요.</p>
+
+      {/* ✈️ 최근 기내 반입 규정 안내 */}
+      <div style={{ background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.3)', padding: '1.2rem 1.5rem', borderRadius: '12px', marginBottom: '2.5rem' }}>
+        <h3 style={{ color: '#b91c1c', fontSize: '1.05rem', marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 600 }}>
+          ⚠️ 2024~25년 기준 비행기 수하물 핵심 주의사항
+        </h3>
+        <ul style={{ color: '#991b1b', fontSize: '0.9rem', lineHeight: '1.6', paddingLeft: '1.5rem', margin: 0 }}>
+          <li style={{ marginBottom: '0.5rem' }}><strong>유럽 전 구간 공항 액체류 100ml 제한 복귀:</strong> 용량 표기가 100ml를 초과하는 빈 용기나 화장품은 남은 양과 무관하게 <strong>기내 반입이 전면 거절</strong>됩니다. 반드시 위탁수하물(캐리어)로 부쳐주세요.</li>
+          <li style={{ marginBottom: '0.5rem' }}><strong>보조배터리 / 전자담배 / 라이터:</strong> 화재 위험으로 인해 절대 수하물 캐리어에 넣을 수 없습니다. <strong>반드시 개인이 기내에 들고 탑승(휴대)</strong>하셔야 합니다.</li>
+          <li><strong>위해 물품 기내 금지:</strong> 손톱깎이는 보통 가능하나 눈썹칼, 일반 가위, 맥가이버칼 등은 기내 반입이 엄격히 금지되므로 수하물로 부쳐주세요.</li>
+        </ul>
+      </div>
 
       {/* 진행 상황 대시보드 */}
       <div className="progress-dashboard">

@@ -23,7 +23,6 @@ async function main() {
     if (parseInt(checkRes.rows[0].count) === 0) {
       const insertDefaultQuery = `
         INSERT INTO admin_checklists (label, description, is_provided_by_admin) VALUES
-        ('여행 공용 멀티플러그 (3구 이상)', '일행 모두가 쓸 수 있도록 관리자 통진환이 챙겨갑니다.', true),
         ('캐리어용 라면 포트 및 컵라면 1박스', '일행 공용 야식. 관리자가 박스채 가져갑니다.', true)
       `;
       await pool.query(insertDefaultQuery);
