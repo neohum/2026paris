@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 export default function FormsPage() {
   const [formData, setFormData] = useState({
@@ -98,13 +97,13 @@ export default function FormsPage() {
           {existingPhoto && !preview && (
              <div style={{ marginBottom: '1rem', background: '#fdfbf7', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(197, 160, 89, 0.2)' }}>
                <p style={{ color: 'var(--primary)', marginBottom: '0.8rem', fontSize: '0.9rem', fontWeight: 600 }}>✅ 현재 업로드되어 있는 여권 사본</p>
-               <Image src={existingPhoto} alt="여권" width={300} height={200} style={{ objectFit: 'contain', borderRadius: '8px' }} />
+               <img src={existingPhoto} alt="여권" style={{ width: '100%', maxWidth: '300px', height: 'auto', objectFit: 'contain', borderRadius: '8px' }} onError={(e) => { e.currentTarget.style.display = 'none'; }} />
              </div>
           )}
           {preview && (
             <div style={{ marginBottom: '1rem', background: 'rgba(16, 185, 129, 0.05)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
               <p style={{ color: '#10b981', marginBottom: '0.8rem', fontSize: '0.9rem', fontWeight: 600 }}>✅ 새로 선택한 이미지 미리보기</p>
-              <Image src={preview} alt="미리보기" width={300} height={200} style={{ objectFit: 'contain', borderRadius: '8px' }} />
+              <img src={preview} alt="미리보기" style={{ width: '100%', maxWidth: '300px', height: 'auto', objectFit: 'contain', borderRadius: '8px' }} />
             </div>
           )}
           <input type="file" accept="image/jpeg, image/png, application/pdf" onChange={handleFileChange} className="flight-input" style={{ marginBottom: 0 }} />
