@@ -3,5 +3,8 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   await logout();
-  return NextResponse.redirect(new URL('/', request.url), { status: 302 });
+  const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
+  const protocol = request.headers.get('x-forwarded-proto') || 'http';
+  const baseUrl = host ? `${protocol}://${host}` : request.url;
+  return NextResponse.redirect(new URL('/', baseUrl), { status: 302 });
 }
